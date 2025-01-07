@@ -4,9 +4,21 @@
 
 Write code that enhances all arrays so that you can call the `array.last()` method on any array, and it will return the last element. If the array is empty, it should return `-1`.
 
-You may assume the array is the output of `JSON.parse`.
 
 ### Examples
+```javascript
+/**
+ * @return {null|boolean|number|string|Array|Object}
+ */
+Array.prototype.last = function() {
+
+};
+
+/**
+ * const arr = [1, 2, 3];
+ * arr.last(); // 3
+ */
+```
 
 #### Example 1:
 ```javascript
