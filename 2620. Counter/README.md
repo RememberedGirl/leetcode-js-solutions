@@ -63,7 +63,6 @@ than the previous value every subsequent time it is called (`n`, `n + 1`, `n + 2
 
 ## Solution
 
-The solution enhances the `Array.prototype` by adding a `last` method, which checks the length of the array. If the array is not empty, it returns the last element. Otherwise, it returns `-1`.
 
 ### Code:
 ```javascript
