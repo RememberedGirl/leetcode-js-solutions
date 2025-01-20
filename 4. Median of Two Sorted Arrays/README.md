@@ -16,8 +16,6 @@ The overall run time complexity should be `O(log (m+n))`.
  */
 var findMedianSortedArrays = function(nums1, nums2) {
 
-
-
     };
 ```
 
@@ -47,6 +45,7 @@ Explanation: merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5.
 - `-10^6 <= nums1[i], nums2[i] <= 106`
 
 ### Problem Link
+
 [LeetCode Problem 4 - Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays)
 
 ---
@@ -56,12 +55,10 @@ Explanation: merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5.
 
 ### Code:
 ```javascript
-
 ```
 
 ### Example Usage:
 ```javascript
-
 ```
 
 ---

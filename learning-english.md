@@ -1,5 +1,17 @@
 # Tasks
 
+## 4. Median of Two Sorted Arrays
+### English:
+Given two sorted arrays `nums1` and `nums2` of size `m` and `n` respectively,
+return the median of the two sorted arrays.
+
+The overall run time complexity should be `O(log (m+n))`.
+### Russian:
+Учитывая два отсортированных массива "nums1" и "nums2" размером "m" и "n" соответственно,
+верните медиану двух отсортированных массивов.
+
+Общая сложность выполнения должна составлять "O(log(m+n))".
+
 ## 2619. Array Prototype Last
 
 ### English:
@@ -16,6 +28,8 @@ Given an integer n, return a counter function. This counter function initially r
 
 ### Russian:
 Дано целое число n, верните функцию-счетчик. Эта функция-счетчик изначально возвращает n, а затем возвращает на 1 больше, чем предыдущее значение, при каждом следующем вызове (n, n + 1, n + 2 и т.д.).
+
+
 
 ---
 
