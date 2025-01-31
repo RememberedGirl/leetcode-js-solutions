@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Median of Two Sorted Arrays Visualization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        #output {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 10px;
+        }
+
+        td {
+            border: 1px solid #999;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 16px;
+            padding: 5px;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #fff;
+            background-color: #007bff;
+        }
+
+        .low {
+            border-left: 4px solid green;
+        }
+
+        .high {
+            border-right: 4px solid red;
+        }
+
+        .partition {
+            border-top: 4px solid orange;
+        }
+
+        .maxLeft {
+            border-bottom: 4px solid purple;
+        }
+
+        .minRight {
+            border-bottom: 4px solid cyan;
+        }
+
+        .dashed {
+            border-style: dashed;
+        }
+
+        #median {
+            font-weight: bold;
+            font-size: 20px;
+            margin-top: 20px;
+        }
+
+        input {
+            margin: 10px;
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .step {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .arrays-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+    </style>
+</head>
+<body>
+<h1>Median of Two Sorted Arrays</h1>
+
+<div>
+    <input id="nums1" type="text" placeholder="Enter first sorted array (comma-separated)">
+    <input id="nums2" type="text" placeholder="Enter second sorted array (comma-separated)">
+    <button onclick="findAndRenderMedian()">Find Median</button>
+</div>
+
+<div id="output"></div>
+
+<div id="median"></div>
+
+<script>
+    window.onload = () => {
+        document.getElementById('nums1').value = '1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3,8';
+        document.getElementById('nums2').value = '7,9,10,12';
+        findAndRenderMedian();
+    };
+
+    const findMedianSortedArrays = async function (nums1, nums2, visualizeStep) {
+        if (nums1.length > nums2.length) {
+            [nums1, nums2] = [nums2, nums1];
+        }
+
+        const m = nums1.length;
+        const n = nums2.length;
+        let low = 0, high = m;
+
+        while (low <= high) {
+            const partition1 = Math.floor((low + high) / 2);
+            const partition2 = Math.floor((m + n + 1) / 2) - partition1;
+
+            const maxLeft1 = partition1 === 0 ? -Infinity : nums1[partition1 - 1];
+            const minRight1 = partition1 === m ? Infinity : nums1[partition1];
+
+            const maxLeft2 = partition2 === 0 ? -Infinity : nums2[partition2 - 1];
+            const minRight2 = partition2 === n ? Infinity : nums2[partition2];
+
+            visualizeStep(nums1, nums2, low, high, partition1, partition2, maxLeft1, minRight1, maxLeft2, minRight2);
+
+            if (maxLeft1 <= minRight2 && maxLeft2 <= minRight1) {
+                if ((m + n) % 2 === 0) {
+                    return (Math.max(maxLeft1, maxLeft2) + Math.min(minRight1, minRight2)) / 2;
+                } else {
+                    return Math.max(maxLeft1, maxLeft2);
+                }
+            } else if (maxLeft1 > minRight2) {
+                high = partition1 - 1;
+            } else {
+                low = partition1 + 1;
+            }
+        }
+
+        throw new Error("Input arrays are not sorted or invalid.");
+    };
+
+    const visualizeStep = function (nums1, nums2, low, high, partition1, partition2, maxLeft1, minRight1, maxLeft2, minRight2) {
+        const output = document.getElementById('output');
+
+        const stepContainer = document.createElement('div');
+        stepContainer.className = 'step';
+
+        const arraysContainer = document.createElement('div');
+        arraysContainer.className = 'arrays-container';
+
+        // Render nums1
+        const table1 = document.createElement('table');
+        const row1 = document.createElement('tr');
+        nums1.forEach((value, index) => {
+            const cell = document.createElement('td');
+            cell.textContent = value;
+
+            if (index === low) cell.classList.add('low');
+            if (index === high - 1) cell.classList.add('high');
+            if (index === partition1 - 1) cell.classList.add('maxLeft');
+            if (index === partition1) cell.classList.add('minRight');
+            if (index === partition1) cell.classList.add('partition');
+
+            // Apply dashed border if value is -Infinity or Infinity
+            if (value === -Infinity || value === Infinity) {
+                cell.classList.add('dashed');
+            }
+
+            // Apply dashed border for maxLeft or minRight if they are -Infinity or Infinity
+            if ((index === partition1 - 1 && maxLeft1 === -Infinity) || (index === partition1 && minRight1 === Infinity)) {
+                cell.classList.add('dashed');
+            }
+
+            row1.appendChild(cell);
+        });
+        table1.appendChild(row1);
+        arraysContainer.appendChild(table1);
+
+        // Render nums2
+        const table2 = document.createElement('table');
+        const row2 = document.createElement('tr');
+        nums2.forEach((value, index) => {
+            const cell = document.createElement('td');
+            cell.textContent = value;
+
+            if (index === partition2 - 1) cell.classList.add('maxLeft');
+            if (index === partition2) cell.classList.add('minRight');
+            if (index === partition2) cell.classList.add('partition');
+
+            // Apply dashed border if value is -Infinity or Infinity
+            if (value === -Infinity || value === Infinity) {
+                cell.classList.add('dashed');
+            }
+
+            // Apply dashed border for maxLeft or minRight if they are -Infinity or Infinity
+            if ((index === partition2 - 1 && maxLeft2 === -Infinity) || (index === partition2 && minRight2 === Infinity)) {
+                cell.classList.add('dashed');
+            }
+
+            row2.appendChild(cell);
+        });
+        table2.appendChild(row2);
+        arraysContainer.appendChild(table2);
+
+        stepContainer.appendChild(arraysContainer);
+        output.appendChild(stepContainer);
+    };
+
+
+    const findAndRenderMedian = async function () {
+        document.getElementById('output').innerHTML = ''; // Clear output
+        const nums1Input = document.getElementById('nums1').value;
+        const nums2Input = document.getElementById('nums2').value;
+
+        const nums1 = nums1Input.split(',').map(Number).filter(x => !isNaN(x));
+        const nums2 = nums2Input.split(',').map(Number).filter(x => !isNaN(x));
+
+        nums1.sort((a, b) => a - b);
+        nums2.sort((a, b) => a - b);
+
+        const median = await findMedianSortedArrays(nums1, nums2, visualizeStep);
+        document.getElementById('median').textContent = `Median: ${median}`;
+    };
+</script>
+</body>
+</html>
