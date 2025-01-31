@@ -3,13 +3,12 @@
  * @param {Function} fn
  * @return {number[]}
  */
-var filter = function(arr, fn) {
+var map = function(arr, fn) {
     const output = []
 
     arr.forEach((elem, i) => {
-        if (fn(elem,i)) {
-            output.push(elem)
-        }
+        output.push(fn(elem,i))
+
     })
 
     return output
@@ -29,7 +28,7 @@ if (typeof document !== 'undefined') {
         const div = document.createElement('div');
         // `n: ${n}, fn: ${fn.toString()} -> ${JSON.stringify(result)}`
 
-        const result = filter(arr, fn)
+        const result = map(arr, fn)
         div.textContent = `arr: ${JSON.stringify(arr)}, fn: ${fn.toString()} -> ${JSON.stringify(result)}`
         output.appendChild(div);
     };
