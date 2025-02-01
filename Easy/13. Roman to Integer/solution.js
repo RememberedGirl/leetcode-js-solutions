@@ -6,7 +6,6 @@
 
 var romanToInt = function(s) {
 
-    let ret = 0
     const romToInt = {
         "I": 1,
         "V": 5,
@@ -17,7 +16,7 @@ var romanToInt = function(s) {
         "M": 1000
     }
 
-    let last = 0, curr
+    let last = 0, ret = 0, curr
     for (let i = 0; i <s.length; i ++){
         curr = romToInt[s[i]]
         ret += curr
