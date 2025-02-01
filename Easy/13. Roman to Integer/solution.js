@@ -29,8 +29,6 @@ var romanToInt = function(s) {
 };
 
 
-
-
 if (typeof document !== 'undefined') {
     const output = document.getElementById('output');
 

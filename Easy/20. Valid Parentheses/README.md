@@ -1,10 +1,14 @@
-# 14. Longest Common Prefix
+# 20. Valid Parentheses
 
 ## Problem Statement
 
-Write a function to find the longest common prefix string amongst an array of strings.
+Given a string `s` containing just the characters `'('`, `')'`, `'{', '}', '['` and `']'`, determine if the input string is valid.
 
-If there is no common prefix, return an empty string `""`.
+An input string is valid if:
+
+Open brackets must be closed by the same type of brackets.
+Open brackets must be closed in the correct order.
+Every close bracket has a corresponding open bracket of the same type.
 
 ### Examples
 ```javascript
@@ -28,7 +32,7 @@ If there is no common prefix, return an empty string `""`.
 
 
 ### Problem Link
-[LeetCode Problem](https://leetcode.com/problems/longest-common-prefix)
+[LeetCode Problem](https://leetcode.com/problems/valid-parentheses)
 
 ---
 
