@@ -1,19 +1,21 @@
 
 /**
  * @param {number[]} nums
+ * @param {number} val
  * @return {number}
  */
-var removeDuplicates = function(nums) {
+var removeElement = function(nums, val) {
     let j = 0;
 
-    for (let i = 1; i < nums.length; i++){
-        if (nums[j] !== nums[i]){
-            nums[j += 1] =  nums[i]
+    for (let i = 0; i < nums.length; i++){
+        if (nums[i] !== val){
+            nums[j++] =  nums[i]
         }
     }
 
-    return j+1
+    return j
 };
+
 
 
 console.log()
@@ -21,7 +23,7 @@ if (typeof document !== 'undefined') {
     const output = document.getElementById('output');
 
 
-    const displayResult = (nums) => {
+    const displayResult = (nums,val) => {
         const div = document.createElement('div');
         // `n: ${n}, fn: ${fn.toString()} -> ${JSON.stringify(result)}`
         // Array.from(
@@ -29,13 +31,14 @@ if (typeof document !== 'undefined') {
         //     (_, index) => index
         // );
 
+
         const numsStr = JSON.stringify(nums)
-        const ret = removeDuplicates(nums)
+        const ret = removeElement(nums,val)
         div.textContent = `nums: ${numsStr} -> n: ${ret}, ${JSON.stringify(nums)}`
         output.appendChild(div);
     };
 
-    displayResult([1,1,2]);
-    displayResult([0,0,1,1,1,2,2,3,3,4]);
+    displayResult([1,1,2],1);
+    displayResult([0,0,1,1,1,2,2,3,3,4],1);
 
 }
