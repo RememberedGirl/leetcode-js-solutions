@@ -34,7 +34,7 @@ if (typeof document !== 'undefined') {
         // );
 
         const ret = strStr(haystack, needle)
-        div.textContent = `haystack: ${haystack}, needle: ${needle} -> needle: ${ret}`
+        div.textContent = `haystack: ${haystack}, needle: ${needle} -> ${ret}`
         output.appendChild(div);
     };
 
