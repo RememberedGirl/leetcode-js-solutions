@@ -25,7 +25,7 @@ if (typeof document !== 'undefined') {
         // );
 
         const ret = lengthOfLastWord(s)
-        div.textContent = `s: ${s}: ${ret}`
+        div.textContent = `s: ${s}  ->  ${ret}`
         output.appendChild(div);
     };
 
